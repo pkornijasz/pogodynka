@@ -11,7 +11,7 @@
 <h1>Pogodynka</h1>
 <div>
     <form th:action="@{/city}" th:object="${city}" method="post">
-        <p><input type="text" th:field="*{name}"></p>
+        <p><input class="city" type="text" th:field="*{name}"></p>
         <p><input type="submit" value="Podaj miasto"></p>
     </form>
 </div>
