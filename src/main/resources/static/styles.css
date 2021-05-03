@@ -36,7 +36,8 @@ input {
     font-family: 'Lato','Open Sans', sans-serif;
     text-align: center;
     padding: 8px;
-    margin: 15px;
+    margin: 16px;
+    text-transform: capitalize;
 }
 
 .warning {
