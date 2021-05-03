@@ -47,8 +47,6 @@ public class WeatherController {
             return weather;
         } catch (HttpStatusCodeException e) {
             return null;
-        } catch (UnknownContentTypeException e) {
-            return null;
         }
     }
 
