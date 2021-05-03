@@ -44,7 +44,6 @@ public class WeatherController {
         try {
             WeatherModel weather = restTemplate.getForObject(url + "q=" + city.getName() + "&lang=" + lang + "&units=" + unit + "&appid=" + apikey, WeatherModel.class);
             weather.setSrc(srcUrl + weather.getWeather().get(0).getIcon() + "@2x.png");
-            System.out.println(weather.getSrc());
             return weather;
         } catch (HttpStatusCodeException e) {
             return null;
