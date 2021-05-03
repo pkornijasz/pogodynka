@@ -1,5 +1,6 @@
 package pl.kornijasz.pogodynka;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.UnknownContentTypeException;
 import pl.kornijasz.pogodynka.model.City;
 import pl.kornijasz.pogodynka.model.WeatherModel;
 
@@ -21,6 +24,7 @@ public class WeatherController {
     @Value("${unit}")
     private String unit;
     private String url = "http://api.openweathermap.org/data/2.5/weather?";
+    private String srcUrl = "https://openweathermap.org/img/wn/";
 
     @GetMapping
     public String get(Model model) {
@@ -39,8 +43,12 @@ public class WeatherController {
         RestTemplate restTemplate = new RestTemplate();
         try {
             WeatherModel weather = restTemplate.getForObject(url + "q=" + city.getName() + "&lang=" + lang + "&units=" + unit + "&appid=" + apikey, WeatherModel.class);
+            weather.setSrc(srcUrl + weather.getWeather().get(0).getIcon() + "@2x.png");
+            System.out.println(weather.getSrc());
             return weather;
-        } catch (HttpClientErrorException e) {
+        } catch (HttpStatusCodeException e) {
+            return null;
+        } catch (UnknownContentTypeException e) {
             return null;
         }
     }

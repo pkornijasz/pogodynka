@@ -32,6 +32,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Generated("jsonschema2pojo")
 public class WeatherModel {
 
+    private String src;
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
     @JsonProperty("coord")
     private Coord coord;
     @JsonProperty("weather")

@@ -17,7 +17,7 @@
 </div>
 <table class="info" th:if="${weather}">
     <tr>
-        <td>Opis:</td>
+        <td><img th:src="${weather.getSrc()}"></td>
         <td th:text="${weather.getWeather().get(0).getDescription()}"></td>
     </tr>
     <tr>
