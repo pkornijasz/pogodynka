@@ -21,6 +21,11 @@ table {
 td {
     padding: 10px;
     border: 1px solid black;
+    text-align: right;
+}
+
+td.value {
+    text-align: left;
 }
 
 h1 {
