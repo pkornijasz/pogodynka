@@ -14,6 +14,8 @@ import org.springframework.web.client.UnknownContentTypeException;
 import pl.kornijasz.pogodynka.model.City;
 import pl.kornijasz.pogodynka.model.WeatherModel;
 
+import java.util.Optional;
+
 @Controller
 public class WeatherController {
     private City city = new City("Kraków");
@@ -39,14 +41,14 @@ public class WeatherController {
         return "redirect:/";
     }
 
-    private WeatherModel getWeather(City city) {
+    private Optional<WeatherModel> getWeather(City city) {
         RestTemplate restTemplate = new RestTemplate();
         try {
             WeatherModel weather = restTemplate.getForObject(url + "q=" + city.getName() + "&lang=" + lang + "&units=" + unit + "&appid=" + apikey, WeatherModel.class);
             weather.setSrc(srcUrl + weather.getWeather().get(0).getIcon() + "@2x.png");
-            return weather;
+            return Optional.ofNullable(weather);
         } catch (HttpStatusCodeException e) {
-            return null;
+            return Optional.empty();
         }
     }
 

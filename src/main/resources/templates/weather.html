@@ -15,41 +15,41 @@
         <p><input type="submit" value="Podaj miasto"></p>
     </form>
 </div>
-<table class="info" th:if="${weather}">
+<table class="info" th:if="${weather.isPresent()}">
     <tr>
-        <td><img th:src="${weather.getSrc()}"></td>
-        <td class="value" th:text="${weather.getWeather().get(0).getDescription()}"></td>
+        <td><img th:src="${weather.get().getSrc()}"></td>
+        <td class="value" th:text="${weather.get().getWeather().get(0).getDescription()}"></td>
     </tr>
     <tr>
         <td>Temperatura &#x2103:</td>
-        <td class="value" th:text="${weather.getMain().getTemp()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getTemp()}"></td>
     </tr>
     <tr>
         <td>Temperatura odczuwalna &#x2103:</td>
-        <td class="value" th:text="${weather.getMain().getFeelsLike()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getFeelsLike()}"></td>
     </tr>
     <tr>
         <td>Temperatura minimalna &#x2103:</td>
-        <td class="value" th:text="${weather.getMain().getTempMin()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getTempMin()}"></td>
     </tr>
     <tr>
         <td>Temperatura maksymalna &#x2103:</td>
-        <td class="value" th:text="${weather.getMain().getTempMax()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getTempMax()}"></td>
     </tr>
     <tr>
         <td>Ciśnienie hPa:</td>
-        <td class="value" th:text="${weather.getMain().getPressure()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getPressure()}"></td>
     </tr>
     <tr>
         <td>Wilgotność %:</td>
-        <td class="value" th:text="${weather.getMain().getHumidity()}"></td>
+        <td class="value" th:text="${weather.get().getMain().getHumidity()}"></td>
     </tr>
     <tr>
         <td>Wiatr m/s:</td>
-        <td class="value" th:text="${weather.getWind().getSpeed()}"></td>
+        <td class="value" th:text="${weather.get().getWind().getSpeed()}"></td>
     </tr>
 </table>
-<div class="warning" th:if="!${weather}">
+<div class="warning" th:if="${weather.isEmpty()}">
     <p>Nie znam takiego miasta, podaj inną nazwę!</p>
 </div>
 
